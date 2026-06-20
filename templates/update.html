@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Task - Task Master
+{% endblock %}
+
+{% block body %}
+
+<form action="/update/{{todo.sno}}" method="POST" id="todo-form">
+    <div class="input-group">
+        <input type="text" name="title" value="{{todo.title}}" id="title" placeholder="Task Title" required
+            autocomplete="off">
+        <input type="text" name="desc" value="{{todo.desc}}" id="desc" placeholder="Description..." required
+            autocomplete="off">
+    </div>
+    <button type="submit" id="add-btn">Update Task</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home - Task Master
+{% endblock %}
+
+{% block body %}
+
+<form action="/" method="POST" id="todo-form">
+    <div class="input-group">
+        <input type="text" name="title" id="title" placeholder="Task Title" required autocomplete="off">
+        <input type="text" name="desc" id="desc" placeholder="Description..." required autocomplete="off">
+    </div>
+    <button type="submit" id="add-btn">Add Task</button>
+</form>
+
+<div class="table-wrapper">
+    {% if allTodo|length == 0 %}
+    <div class="no-tasks">No tasks found. Add your first task above!</div>
+    {% else %}
+    <table class="todo-table">
+        <thead>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in allTodo %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td class="task-title">{{ todo.title }}</td>
+                <td class="task-desc">{{ todo.desc }}</td>
+                <td>{{ todo.date_created.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <a href="/delete/{{todo.sno}}" class="delete-link">&times; Delete</a>
+                    <a href="/update/{{todo.sno}}" class="update-link">&uarr; Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+
+{% endblock %}
